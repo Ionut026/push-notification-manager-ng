@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm bg-info navbar-dark justify-content-center">
+    <div class="container-fluid">
+        <a class="navbar-brand text-light" href="#">
+            Notification Manager
+        </a>
+        <div class="container-xl">
+            <ul class="nav navbar-nav">
+                <li routerLinkActive="active"> <a class="nav-item nav-link" routerLink="/secure/home">Home</a></li>
+                <li routerLinkActive="active"> <a class="nav-item nav-link" routerLink="/secure/admin"
+                        *ngIf="isAdmin">Admin</a></li>
+                <li routerLinkActive="active"> <a class="nav-item nav-link" routerLink="/secure/about">About</a></li>
+            </ul>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+            <a class="nav-item nav-link text-light" (click)="logout()">Logout</a>
+        </div>
+    </div>
+
+
+</nav>
+
+<div class="container container-xl">
+    <router-outlet></router-outlet>
+</div>
+
+<footer class="text-center text-lg-start fixed-bottom bg-info text-light">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-light" href="mailto:ionu02618@gmail.com"> Serbanescu Ionut</a>
+    </div>
+</footer>

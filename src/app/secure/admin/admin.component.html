@@ -1,0 +1,66 @@
+<div class="col-md-12 mt-3 mb-5">
+    <h4 class="mx-2 mb-3">Users Administration </h4>
+
+    <div class=" row">
+        <div class="col-12 col-md-6 mb-5">
+            <div class="card bg-light">
+                <h5 class="mx-2 mt-1">Create User</h5>
+                <div class="card-body">
+                    <form class="small" [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <label for="userName">Username*</label>
+                                <input type="text" formControlName="userName" class="form-control form-control-sm"
+                                    [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+                                <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                    <div *ngIf="submitted && f.userName.errors.required">Username is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="password">Password*</label>
+                                <input type="text" formControlName="password" class="form-control form-control-sm"
+                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="submitted && f.password.errors.required">Password is required</div>
+                                </div>
+                            </div>                           
+                        </div>
+                        <button [disabled]="loading" class="btn btn-primary btn-sm">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Create
+                        </button>
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card col-12 col-md-6 mb-5 bg-light">
+            <h5 class="mx-2 mt-1">Available Users</h5>
+            <div class="card-body">
+                <div class="col-xs-6 col-lg-12">
+                    <table class="table small table-sm">
+                        <thead class="text-white bg-info">
+                            <tr>
+                                <th> Name</th>
+                                <th> Password</th>
+                                <th> Role</th>
+                                <th> Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users | async">
+                                <td> {{user.userName}}</td>
+                                <td> {{user.password}}</td>
+                                <td> {{user.role}}</td>
+                                <td> <button *ngIf="user.role != Roles.Admin" type="button"
+                                        class="btn btn-sm py-0  btn-danger" (click)="onDeleteUser(user)">Delete</button>
+                                    <p *ngIf="user.role == Roles.Admin">Read only</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
